@@ -1,22 +1,24 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'react-native-hid-access' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo Go\n';
+// 1. Initialise the HID module with Application ID
+export const initialise = (applicationId: string) => {
+  return NativeModules.OrigoManager.initialise(applicationId);
+};
 
-const HidAccess = NativeModules.HidAccess
-  ? NativeModules.HidAccess
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+export const refreshEndpoint = async () => {
+  await NativeModules.OrigoManager.refreshEndpoint();
+};
 
-export function multiply(a: number, b: number): Promise<number> {
-  return HidAccess.multiply(a, b);
-}
+export const hasMobileKey = async () => {
+  await NativeModules.OrigoManager.hasMobileKey();
+};
+
+// 2. Register HID registration code
+export const setRegistrationCode = (code: string) => {
+  NativeModules.OrigoManager.setRegistrationCode(code);
+};
+
+// 3. Open to the closest reader
+export const openClosestReader = () => {
+  return NativeModules.OrigoManager.openClosestReader();
+};

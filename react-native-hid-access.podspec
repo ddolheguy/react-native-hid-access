@@ -36,6 +36,10 @@ Pod::Spec.new do |s|
       s.dependency "RCTRequired"
       s.dependency "RCTTypeSafety"
       s.dependency "ReactCommon/turbomodule/core"
+      s.dependency 'BerTlv', '~> 0.2.5'
+      s.dependency 'CocoaLumberjack', '~> 3.8.2'
+      s.dependency 'JSONModel', '~> 1.8.0'
+      s.dependency 'SwiftConnectHID', '~> 1.0.0'
     end
   end
 end
