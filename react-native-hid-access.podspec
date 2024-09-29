@@ -14,7 +14,9 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => min_ios_version_supported }
   s.source       = { :git => "https://github.com/ddolheguy/react-native-hid-access.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,m,mm,swift}"
+  s.vendored_frameworks = 'support/debug/BerTlv.framework', 'support/debug/CocoaLumberjack.framework', 'support/debug/JSONModel.framework', 'support/debug/Mixpanel.framework', 'support/debug/OrigoSDK.framework', 'support/debug/SeosMobileKeysSDK.framework'
+
+  s.source_files = "ios/**/*.{h,m,mm,swift,xcframework}"
 
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.
   # See https://github.com/facebook/react-native/blob/febf6b7f33fdb4904669f99d795eba4c0f95d7bf/scripts/cocoapods/new_architecture.rb#L79.
@@ -24,22 +26,22 @@ Pod::Spec.new do |s|
     s.dependency "React-Core"
 
     # Don't install the dependencies when we run `pod install` in the old architecture.
-    if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
-      s.compiler_flags = folly_compiler_flags + " -DRCT_NEW_ARCH_ENABLED=1"
-      s.pod_target_xcconfig    = {
-          "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\"",
-          "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
-          "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
-      }
-      s.dependency "React-Codegen"
-      s.dependency "RCT-Folly"
-      s.dependency "RCTRequired"
-      s.dependency "RCTTypeSafety"
-      s.dependency "ReactCommon/turbomodule/core"
-      s.dependency 'BerTlv', '~> 0.2.5'
-      s.dependency 'CocoaLumberjack', '~> 3.8.2'
-      s.dependency 'JSONModel', '~> 1.8.0'
-      s.dependency 'SwiftConnectHID', '~> 1.0.0'
-    end
+    # if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
+    #   s.compiler_flags = folly_compiler_flags + " -DRCT_NEW_ARCH_ENABLED=1"
+    #   s.pod_target_xcconfig    = {
+    #       "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\"",
+    #       "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
+    #       "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
+    #   }
+    #   s.dependency "React-Codegen"
+    #   s.dependency "RCT-Folly"
+    #   s.dependency "RCTRequired"
+    #   s.dependency "RCTTypeSafety"
+    #   s.dependency "ReactCommon/turbomodule/core"
+    #   # s.dependency 'BerTlv', '~> 0.2.5'
+    #   # s.dependency 'CocoaLumberjack', '~> 3.8.2'
+    #   # s.dependency 'JSONModel', '~> 1.8.0'
+    #   # s.dependency 'SwiftConnectHID', '~> 1.0.0'
+    # end
   end
 end
