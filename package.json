@@ -1,6 +1,6 @@
 {
   "name": "react-native-hid-access",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Native bindings for the HID Mobile Connect SDK",
   "main": "index.js",
   "types": "index.d.ts",
