@@ -1,3 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.hidaccess">
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+
+    <uses-permission android:name="android.permission.NFC"/>
+
+    <!-- NFC permissions and features -->
+    <uses-feature android:name="android.hardware.nfc.hce" android:required="false"/>
+
+      <activity
+        android:enabled="true"
+        android:exported="true"
+        android:name="com.assaabloy.mobilekeys.api.network.NfcTagNetworkReaderActivity">
+          <intent-filter>
+              <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+              <category android:name="android.intent.category.DEFAULT"/>
+              <data android:scheme="@string/networkreaderscheme"/>
+          </intent-filter>
+      </activity>
+
 </manifest>
